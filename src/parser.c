@@ -140,6 +140,12 @@ parse_file(struct prog_info *pi, const char *filename)
 #if debug == 1
 	printf("Opening %s\n",filename);
 #endif
+
+    if( (pi->pass==PASS_2) && (pi->printinc) )
+      {
+        printf("Including %s\n",filename);
+      }
+    
 	if ((fi->fp = fopen(filename, "r"))==NULL) {
 		perror(filename);
 		free(fi);

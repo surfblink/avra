@@ -50,6 +50,7 @@ const char *usage =
     "            [--define <symbol>[=<value>]]\n"
     "            [-I <dir>] [--listmac]\n"
     "            [--max_errors <number>] [--devices] [--version]\n"
+    "            [-p] print full path of included files on pass 2\n"
     "            [-O e|w|i]\n"
     "            [-h] [--help] general help\n"
     "            <file to assemble>\n"
@@ -63,6 +64,7 @@ const char *usage =
     "                      (default: 10)\n"
     "   --devices        : List out supported devices.\n"
     "   --version        : Version information.\n"
+    "   --print-inc      : print full path of included files on pass 2\n"
     "   -O e|w|i         : Issue error/warning/ignore overlapping code.\n"
     "   --help, -h       : This help text.\n";
 
@@ -108,6 +110,7 @@ main(int argc, const char *argv[])
 		define_arg(args, ARG_DEVICES,     ARGTYPE_BOOLEAN,              0,  "devices",     NULL, NULL);
 		define_arg(args, ARG_VER,         ARGTYPE_BOOLEAN,              0,  "version",     NULL, NULL);
 		define_arg(args, ARG_HELP,        ARGTYPE_BOOLEAN,             'h', "help",        NULL, NULL);
+		define_arg(args, ARG_PRINTINC,    ARGTYPE_BOOLEAN,             'p', "print-inc",   NULL, NULL);
 		define_arg(args, ARG_WRAP,        ARGTYPE_BOOLEAN,             'w', "wrap",        NULL, NULL);	/* Not implemented ? B.A. */
 		define_arg(args, ARG_WARNINGS,    ARGTYPE_STRING_MULTISINGLE,  'W', "warn",        NULL, NULL);
 		define_arg(args, ARG_FILEFORMAT,  ARGTYPE_CHAR_ATTACHED,       'f', "filetype",    "0",	 NULL);	/* Not implemented ? B.A. */
@@ -381,6 +384,7 @@ init_prog_info(struct prog_info *pi, struct args *args)
 
 	pi->max_errors = GET_ARG_I(args, ARG_MAX_ERRORS);
 	pi->pass=PASS_1;
+    pi->printinc = GET_ARG_I(args, ARG_PRINTINC);
 	pi->time=time(NULL);
 	pi->effective_overlap = GET_ARG_I(pi->args, ARG_OVERLAP);
 	pi->segment_overlap = SEG_DONT_OVERLAP;

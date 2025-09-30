@@ -59,6 +59,7 @@ enum {
 	ARG_DEVICES,		/* --devices               */
 	ARG_VER,		/* --version               */
 	ARG_HELP,		/* --help, -h              */
+	ARG_PRINTINC,		/* --print-inc, -p         */
 	ARG_WRAP,		/* --wrap                  */
 	ARG_WARNINGS,		/* --warn, -W              */
 	ARG_FILEFORMAT,		/* --filetype              */
@@ -188,6 +189,7 @@ struct prog_info {
 	/* Warning additions */
 	int NoRegDef;
 	int pass;
+	int printinc;
 };
 
 struct file_info {
